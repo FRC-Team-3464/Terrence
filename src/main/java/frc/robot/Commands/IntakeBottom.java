@@ -28,6 +28,8 @@ public class IntakeBottom extends CommandBase {
   @Override
   public void execute() {
     intakeSub.intakeBottom(-.75);
+    intakeSub.reLaySetDirection(1);
+    //Intake forward
   }
 
  @Override
