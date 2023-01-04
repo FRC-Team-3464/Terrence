@@ -31,6 +31,10 @@ public class IntakeBottom extends CommandBase {
     intakeSub.reLaySetDirection(1);
     //Intake forward
   }
+  @Override
+  public void end(boolean interrupted) {
+    intakeSub.reLaySetDirection(0);
+  }
 
  @Override
   public boolean isFinished() {
