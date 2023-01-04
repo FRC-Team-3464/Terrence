@@ -25,14 +25,14 @@ public class IntakeSubsystem extends SubsystemBase {
   }
   //-1, Reverse; 0, Off; 1 Forward
   public void reLaySetDirection(int d){
-if(d== -1){
-  intakeRelay.set(Value.kReverse);
-}
-if(d== 0){
-  intakeRelay.set(Value.kOff);
-}
-if(d== 1){
-  intakeRelay.set(Value.kForward);
+    if(d == -1){
+      intakeRelay.set(Value.kReverse);  
+    }
+    if(d == 0){
+      intakeRelay.set(Value.kOff);
+    }
+    if(d == 1){
+      intakeRelay.set(Value.kForward);
 }
 
   }
