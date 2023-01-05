@@ -30,7 +30,7 @@ private final EncoderSubsystem encoderSub;
   }
   @Override
   public void execute() {
-    driveSub.arcadeDrive(-(driverPID.calculate(encoderSub.getRightEncoder(), -32)), 0);
+    driveSub.arcadeDrive(driverPID.calculate(encoderSub.getRightEncoder(),32), 0);
   }
 
 
@@ -41,7 +41,7 @@ private final EncoderSubsystem encoderSub;
 
  @Override
   public boolean isFinished() {
-    if(Math.abs(driverPID.getPositionError()) < 8){
+    if(Math.abs(driverPID.getPositionError()) < 12){
         return true;
     }
     else{
