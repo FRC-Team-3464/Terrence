@@ -9,6 +9,11 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
+import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Subsystems.*;
 import frc.robot.Autos.*;
 import frc.robot.Commands.*;
@@ -64,7 +69,8 @@ public class RobotContainer {
   private final Auto1 auto1 = new Auto1( driveSub, encoderSub, intakeSub, shootSub, limePIDSub, gyroSub);
   private final Auto2 auto2 = new Auto2(driveSub, encoderSub, intakeSub, shootSub, limePIDSub, limeDistance, gyroSub);
   private final Auto3 auto3 = new Auto3(driveSub, encoderSub, intakeBottom, shoot2Comm,gyroSub);
-
+  private final pidCMDforward pidF = new pidCMDforward(driveSub, encoderSub);
+  private final pidBackCMD pidB = new pidBackCMD(driveSub, encoderSub);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -129,34 +135,36 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    Command m_autoCommand;
-    //get selected choice from chooser
-    String autoSelected = Robot.m_chooser.getSelected();
-    // turn auto choice, recieved as a string, into an actual command to return
-    switch (autoSelected) {
-      case "Auto1":
-        // Put custom auto code here
-        //System.out.println("Auto1");
-        Robot.autoStatus = "Auto1";
-        m_autoCommand = auto1;
-        break;
-      case "Auto2":
-        //System.out.println("Auto2");
-        Robot.autoStatus = "Auto2";
-        m_autoCommand = auto2;
-        break;
-      case "Auto3":
-        //System.out.println("Auto3");
-        Robot.autoStatus = "Auto3";
-        m_autoCommand = auto3;
-        break;
-      default: 
-        //System.out.println("Auto1");
-        Robot.autoStatus = "Auto1";
-        m_autoCommand = auto1;
-        break;
-    }
-    return m_autoCommand;
+    // Command m_autoCommand;
+    // //get selected choice from chooser
+    // String autoSelected = Robot.m_chooser.getSelected();
+    // // turn auto choice, recieved as a string, into an actual command to return
+    // switch (autoSelected) {
+    //   case "Auto1":
+    //     // Put custom auto code here
+    //     //System.out.println("Auto1");
+    //     Robot.autoStatus = "Auto1";
+    //     m_autoCommand = auto1;
+    //     break;
+    //   case "Auto2":
+    //     //System.out.println("Auto2");
+    //     Robot.autoStatus = "Auto2";
+    //     m_autoCommand = auto2;
+    //     break;
+    //   case "Auto3":
+    //     //System.out.println("Auto3");
+    //     Robot.autoStatus = "Auto3";
+    //     m_autoCommand = auto3;
+    //     break;
+    //   default: 
+    //     //System.out.println("Auto1");
+    //     Robot.autoStatus = "Auto1";
+    //     m_autoCommand = auto1;
+    //     break;
+    // }
+    // return new SequentialCommandGroup(new ParallelRaceGroup(pidF, intakeBottom), new WaitCommand(2), new ParallelRaceGroup(pidB, reverse));
+    return new SequentialCommandGroup(new ParallelDeadlineGroup(pidF, intakeBottom), new InstantCommand(intakeSub::stopIntakes), new WaitCommand(2), pidB);
+
     
   }
 }
