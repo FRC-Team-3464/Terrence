@@ -64,7 +64,7 @@ public class RobotContainer {
   private final Auto1 auto1 = new Auto1( driveSub, encoderSub, intakeSub, shootSub, limePIDSub, gyroSub);
   private final Auto2 auto2 = new Auto2(driveSub, encoderSub, intakeSub, shootSub, limePIDSub, limeDistance, gyroSub);
   private final Auto3 auto3 = new Auto3(driveSub, encoderSub, intakeBottom, shoot2Comm,gyroSub);
-
+  private final pidCMD autoTest = new pidCMD(driveSub, encoderSub);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -129,34 +129,34 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    Command m_autoCommand;
-    //get selected choice from chooser
-    String autoSelected = Robot.m_chooser.getSelected();
-    // turn auto choice, recieved as a string, into an actual command to return
-    switch (autoSelected) {
-      case "Auto1":
-        // Put custom auto code here
-        //System.out.println("Auto1");
-        Robot.autoStatus = "Auto1";
-        m_autoCommand = auto1;
-        break;
-      case "Auto2":
-        //System.out.println("Auto2");
-        Robot.autoStatus = "Auto2";
-        m_autoCommand = auto2;
-        break;
-      case "Auto3":
-        //System.out.println("Auto3");
-        Robot.autoStatus = "Auto3";
-        m_autoCommand = auto3;
-        break;
-      default: 
-        //System.out.println("Auto1");
-        Robot.autoStatus = "Auto1";
-        m_autoCommand = auto1;
-        break;
-    }
-    return m_autoCommand;
+    // Command m_autoCommand;
+    // //get selected choice from chooser
+    // String autoSelected = Robot.m_chooser.getSelected();
+    // // turn auto choice, recieved as a string, into an actual command to return
+    // switch (autoSelected) {
+    //   case "Auto1":
+    //     // Put custom auto code here
+    //     //System.out.println("Auto1");
+    //     Robot.autoStatus = "Auto1";
+    //     m_autoCommand = auto1;
+    //     break;
+    //   case "Auto2":
+    //     //System.out.println("Auto2");
+    //     Robot.autoStatus = "Auto2";
+    //     m_autoCommand = auto2;
+    //     break;
+    //   case "Auto3":
+    //     //System.out.println("Auto3");
+    //     Robot.autoStatus = "Auto3";
+    //     m_autoCommand = auto3;
+    //     break;
+    //   default: 
+    //     //System.out.println("Auto1");
+    //     Robot.autoStatus = "Auto1";
+    //     m_autoCommand = auto1;
+    //     break;
+    // }
+    return autoTest;
     
   }
 }
