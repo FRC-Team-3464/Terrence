@@ -10,10 +10,10 @@ import frc.robot.Subsystems.IntakeSubsystem;
    *
    * @param IntakeSubsystem The subsystem used by this command.
    */
-   
+  
 public class IntakeBottom extends CommandBase {
   //@SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-  private final IntakeSubsystem intakeSub;
+  private final IntakeSubsystem intakeSub; // Add the sub
 
   public IntakeBottom(IntakeSubsystem intake) {
     intakeSub = intake;
