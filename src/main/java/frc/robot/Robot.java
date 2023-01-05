@@ -271,7 +271,10 @@ public class Robot extends TimedRobot {
   /** This function is called once when the robot is disabled. */
   @Override
   public void disabledInit() {
-
+        //cancels auto command if still running
+        if (this.m_autonomousCommand != null)
+        this.m_autonomousCommand.cancel(); 
+  
     //disable motors (coast mode)
     //allows for easy moving of robot by hand
     driveSub.enableMotors(false);
