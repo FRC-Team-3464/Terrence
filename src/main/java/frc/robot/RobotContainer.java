@@ -91,6 +91,8 @@ public class RobotContainer {
 
     OI.button5Aux.whileHeld(intakeBottom);
     OI.button5Aux.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub));
+    OI.button5Aux.whenReleased(new InstantCommand(intakeSub::stopRelay, intakeSub));
+
 
     OI.button6Aux.whileHeld(intakeTop);
     OI.button6Aux.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub));
