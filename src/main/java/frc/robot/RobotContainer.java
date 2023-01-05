@@ -9,6 +9,8 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Subsystems.*;
 import frc.robot.Autos.*;
 import frc.robot.Commands.*;
@@ -64,7 +66,8 @@ public class RobotContainer {
   private final Auto1 auto1 = new Auto1( driveSub, encoderSub, intakeSub, shootSub, limePIDSub, gyroSub);
   private final Auto2 auto2 = new Auto2(driveSub, encoderSub, intakeSub, shootSub, limePIDSub, limeDistance, gyroSub);
   private final Auto3 auto3 = new Auto3(driveSub, encoderSub, intakeBottom, shoot2Comm,gyroSub);
-  private final pidCMD autoTest = new pidCMD(driveSub, encoderSub);
+  private final pidCMDforward pidF = new pidCMDforward(driveSub, encoderSub);
+  private final pidBackCMD pidB = new pidBackCMD(driveSub, encoderSub);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -156,7 +159,7 @@ public class RobotContainer {
     //     m_autoCommand = auto1;
     //     break;
     // }
-    return autoTest;
+    return new SequentialCommandGroup(pidF, new WaitCommand(3),pidB);
     
   }
 }
