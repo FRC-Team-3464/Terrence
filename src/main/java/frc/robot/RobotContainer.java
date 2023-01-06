@@ -9,9 +9,9 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
+// import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import edu.wpi.first.wpilibj2.command.ParallelDeadlineGroup;
-import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
+// import edu.wpi.first.wpilibj2.command.ParallelRaceGroup;
 import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.WaitCommand;
 import frc.robot.Subsystems.*;
@@ -34,11 +34,9 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSub = new IntakeSubsystem();
   private final ElevatorSubsystem elevSub = new ElevatorSubsystem();
   private final AnalogSubsystem analogSub = new AnalogSubsystem();
-  private final RampComponent rampSub = new RampComponent(1.33, 2.5);
+  private final RampComponent rampSub = new RampComponent(1.33, 2.5);  
+  private final NavXSubsystem navX = new NavXSubsystem();
   
-
-  
-
   
 
   private final Shoot2Balls shoot2Comm = new Shoot2Balls(intakeSub, shootSub, Robot.shootInt);
@@ -71,6 +69,10 @@ public class RobotContainer {
   private final Auto3 auto3 = new Auto3(driveSub, encoderSub, intakeBottom, shoot2Comm,gyroSub);
   private final pidCMDforward pidF = new pidCMDforward(driveSub, encoderSub);
   private final pidBackCMD pidB = new pidBackCMD(driveSub, encoderSub);
+  private final NavXPIDCMD PIDNavX = new NavXPIDCMD(navX, driveSub);
+
+  private final SequentialCommandGroup moveFowardAndBackward = new SequentialCommandGroup(new ParallelDeadlineGroup(pidF, intakeBottom), new InstantCommand(intakeSub::stopIntakes), new WaitCommand(2), pidB);
+  
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -163,8 +165,6 @@ public class RobotContainer {
     //     break;
     // }
     // return new SequentialCommandGroup(new ParallelRaceGroup(pidF, intakeBottom), new WaitCommand(2), new ParallelRaceGroup(pidB, reverse));
-    return new SequentialCommandGroup(new ParallelDeadlineGroup(pidF, intakeBottom), new InstantCommand(intakeSub::stopIntakes), new WaitCommand(2), pidB);
-
-    
+    return PIDNavX;
   }
 }
