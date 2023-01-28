@@ -7,7 +7,7 @@ package frc.robot.Subsystems;
 import com.revrobotics.RelativeEncoder;
 
 import frc.robot.RobotMap;
-
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 /**
  * Subsystem for Encoders (drive train)
@@ -37,6 +37,7 @@ public class EncoderSubsystem extends SubsystemBase {
   //no need for both left encoders due to equal values
   public double getLeftEncoder(){
     return leftFrontEncoder.getPosition();
+    
   }
   //get right encoder 
   //no need for both right encoders due to equal values
@@ -53,8 +54,10 @@ public class EncoderSubsystem extends SubsystemBase {
     rightFrontEncoder.setPosition(num);
   }
   
+    
   @Override
   public void periodic() {
+    // SmartDashboard.putNumber("right speed", rightFrontEncoder.);
     // This method will be called once per scheduler run
   }
 }

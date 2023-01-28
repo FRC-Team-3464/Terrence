@@ -14,7 +14,7 @@ import frc.robot.Subsystems.NavX;
 public class tiltPIDCmd extends CommandBase {
   /** Creates a new tiltPIDCmd. */
 
-  private final PIDController balanceController = new PIDController(-0.0167, 0, 0);
+  private final PIDController balanceController = new PIDController(-0.025, 0, 0);
   
   private final NavX navX;
   private final DriveSubsystem driveSubsystem;
@@ -42,14 +42,14 @@ public class tiltPIDCmd extends CommandBase {
   @Override
   public void execute() {
     outputSpeed = balanceController.calculate(navX.returnPitch());
-    if((Math.abs(outputSpeed) > 0.5) || (Math.abs(outputSpeed) < 0.05)){
+    if((Math.abs(outputSpeed) > 0.5) || (Math.abs(outputSpeed) < 0.13125)){
       outputSpeed = 0;
       status = false;
     }else{
       status = true;      
     }
 
-    driveSubsystem.arcadeDrive(outputSpeed, 0); // Just drive forward and back. 
+    // driveSubsystem.arcadeDrive(outputSpeed, 0); // Just drive forward and back. 
     SmartDashboard.putNumber("Balance Speed", outputSpeed);
     SmartDashboard.putBoolean("Balance Status", status); // RED IS NOT GOOD
   }

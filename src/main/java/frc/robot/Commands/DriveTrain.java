@@ -3,6 +3,7 @@ package frc.robot.Commands;
 import frc.robot.OI;
 import frc.robot.Subsystems.DriveSubsystem;
 import frc.robot.Subsystems.RampComponent;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
 /**
@@ -73,7 +74,7 @@ public class DriveTrain extends CommandBase {
     
     //sets drive train to speed, and then the rotation to another joystick value with a 65% multiplier
     // This is -0.55.. I think .
-
+    SmartDashboard.putNumber("Forward Speed", speed);
     driveSub.arcadeDrive(speed, OI.controller.getRawAxis(4)*0.55);
   }
     
