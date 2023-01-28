@@ -34,6 +34,7 @@ public class RobotContainer {
 
   // private final   new InstantCommand(intakeSub::stopIntakes, intakeSub)
 // These are commands. 
+
   private final Shoot2Balls shoot2Comm = new Shoot2Balls(intakeSub, shootSub, Robot.shootInt);
   private final ShooterRun shootOnly = new ShooterRun(shootSub);
   private final DriveTrain arcadeDrive = new DriveTrain(driveSub, rampSub);
@@ -51,6 +52,7 @@ public class RobotContainer {
 
   private final LimelightSubsystem limeSub = new LimelightSubsystem();
   
+  private final tiltPIDCmd tiltCmd = new tiltPIDCmd(navXSub, driveSub);
   private final toggleLimelightCommand turnLimeLiteOn = new toggleLimelightCommand(limeSub, true);
   private final toggleLimelightCommand turnLimeLiteOff = new toggleLimelightCommand(limeSub, false);
 
@@ -87,7 +89,9 @@ public class RobotContainer {
     // CommandScheduler.getInstance().setDefaultCommand(navXSub, returnPitch);
     
     // CommandScheduler.getInstance().setDefaultCommand(navXSub, new InstantCommand(navXSub::returnPitch, navXSub));
-    
+    // Tilt command that should run when we press button once. 
+    OI.button8Aux.toggleOnTrue(tiltCmd);
+
     OI.button10Aux.onTrue(turnLimeLiteOn);
     OI.button11Aux.onTrue(turnLimeLiteOff);
     //commands that are mapped to buttons, to run when button is pressed/held/etc.
