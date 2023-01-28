@@ -25,8 +25,8 @@ public class NavX extends SubsystemBase {
     ahrs.calibrate();
   }
 
-  public void returnPitch(){
-    SmartDashboard.putNumber("IMU_Roll", ahrs.getRoll());
+  public double returnPitch(){
+    return ahrs.getPitch();
   }
 
   @Override
