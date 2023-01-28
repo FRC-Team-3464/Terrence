@@ -32,9 +32,6 @@ public class RobotContainer {
   private final RampComponent rampSub = new RampComponent(1.33, 2.5);
   
 
-  
-
-  
 
   private final Shoot2Balls shoot2Comm = new Shoot2Balls(intakeSub, shootSub, Robot.shootInt);
   private final ShooterRun shootOnly = new ShooterRun(shootSub);
@@ -84,43 +81,43 @@ public class RobotContainer {
     CommandScheduler.getInstance().setDefaultCommand(analogSub, isBall);
     
     //commands that are mapped to buttons, to run when button is pressed/held/etc.
-    OI.triggerAux.whenPressed(shoot2Comm);
+    OI.triggerAux.onTrue(shoot2Comm);
     
-    OI.button3Aux.whileHeld(intakeBoth);
-    OI.button3Aux.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub)); //double dots :: used to pass a method of the class
+    OI.button3Aux.onTrue(intakeBoth);
+    OI.button3Aux.onFalse(new InstantCommand(intakeSub::stopIntakes, intakeSub)); //double dots :: used to pass a method of the class
 
-    OI.button5Aux.whileHeld(intakeBottom);
-    OI.button5Aux.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub));
+    OI.button5Aux.whileTrue(intakeBottom);
+    OI.button5Aux.onFalse(new InstantCommand(intakeSub::stopIntakes, intakeSub));
 
-    OI.button6Aux.whileHeld(intakeTop);
-    OI.button6Aux.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub));
+    OI.button6Aux.whileTrue(intakeTop);
+    OI.button6Aux.onFalse(new InstantCommand(intakeSub::stopIntakes, intakeSub));
 
-    OI.button4Aux.whileHeld(shootOnly);
-    OI.button4Aux.whenReleased(new InstantCommand(shootSub::stopShooter, shootSub));
+    OI.button4Aux.whileTrue(shootOnly);
+    OI.button4Aux.onFalse(new InstantCommand(shootSub::stopShooter, shootSub));
 
-    OI.button2Aux.whileHeld(reverse);
-    OI.button2Aux.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub));
-    OI.button2Aux.whenReleased(new InstantCommand(shootSub::stopShooter, shootSub));
+    OI.button2Aux.whileTrue(reverse);
+    OI.button2Aux.onFalse(new InstantCommand(intakeSub::stopIntakes, intakeSub));
+    OI.button2Aux.onFalse(new InstantCommand(shootSub::stopShooter, shootSub));
 
     //OI.button7Left.whenPressed(new InstantCommand(encoderSub::resetEncoders, encoderSub));
 
-    OI.povButtonDown.whileHeld(elevDown);
-    OI.povButtonDown.whenReleased(new InstantCommand(elevSub::stopElevator));
-    OI.povButtonUp.whileHeld(elevUp);
-    OI.povButtonUp.whenReleased(new InstantCommand(elevSub::stopElevator));
+    OI.povButtonDown.whileTrue(elevDown);
+    OI.povButtonDown.onFalse(new InstantCommand(elevSub::stopElevator));
+    OI.povButtonUp.whileTrue(elevUp);
+    OI.povButtonUp.onFalse(new InstantCommand(elevSub::stopElevator));
 
     // OI.button12Aux.whileHeld(new InstantCommand(limeSub::targetLime));
-    OI.button10Aux.whenReleased(new InstantCommand(driveSub::stopDrive));
+    OI.button10Aux.onFalse(new InstantCommand(driveSub::stopDrive));
 
     // OI.buttonX.whileHeld(new InstantCommand(limePIDSub::enable, limePIDSub));
     //OI.buttonX.whenReleased(new InstantCommand(limePIDSub::disable, limePIDSub));
-    OI.buttonLB.whileHeld(aim);
-    OI.buttonRB.whileHeld(distance);
+    OI.buttonLB.whileTrue(aim);
+    OI.buttonRB.whileTrue(distance);
     //OI.buttonY.whileHeld(new InstantCommand(limeDistance::loserAiming));
     //OI.buttonLB.whileHeld(intakeBottom);
     //OI.buttonLB.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub));
     //OI.buttonRB.whenPressed(shoot2Comm);
-    OI.buttonPancake.whenPressed(new InstantCommand(gyroSub::calibrate));
+    OI.buttonPancake.onTrue(new InstantCommand(gyroSub::calibrate));
   }
 
   /**

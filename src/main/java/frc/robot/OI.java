@@ -6,11 +6,16 @@ import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 //import frc.robot.Commands.ElevatorCommand;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
+// import edu.wpi.first.wpilibj2.command.button.Trigger;
+// import edu.wpi.first.wpilibj2.command.button.Trigger;
 
 /* OI instantiates the joysticks and controllers used by drivers to operate the robot
       The buttons on these controllers are also instantiated in order to run commands when they are pressed */
 public class OI {
 
+  // public static Trigger triggerButton (XboxController controller, XboxController.Axis axis) {
+  //   return new Trigger(() -> controller.getRawAxis(axis.value) >= 0.5);
+  // }
   //declaring joysticks to be used
   public static Joystick
   leftStick, // 
@@ -18,6 +23,10 @@ public class OI {
   controller, // 
   auxStick; // 
 
+
+  // public static Trigger auxStickButton9 = new Trigger(null);
+  // auxStick.trigg
+  
 //declaring buttons for each joystick
 public static JoystickButton 
   triggerRight, // 
