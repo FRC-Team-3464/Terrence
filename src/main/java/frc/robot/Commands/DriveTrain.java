@@ -74,7 +74,7 @@ public class DriveTrain extends CommandBase {
     //sets drive train to speed, and then the rotation to another joystick value with a 65% multiplier
     // This is -0.55.. I think .
 
-    driveSub.arcadeDrive(speed, OI.controller.getRawAxis(4)*-.55);
+    driveSub.arcadeDrive(speed, OI.controller.getRawAxis(4)*0.55);
   }
     
 
