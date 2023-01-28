@@ -30,9 +30,10 @@ public class RobotContainer {
   private final ElevatorSubsystem elevSub = new ElevatorSubsystem();
   private final AnalogSubsystem analogSub = new AnalogSubsystem();
   private final RampComponent rampSub = new RampComponent(1.33, 2.5);
-  
+  private final NavX navXSub = new NavX();  
 
-
+  // private final   new InstantCommand(intakeSub::stopIntakes, intakeSub)
+// These are commands. 
   private final Shoot2Balls shoot2Comm = new Shoot2Balls(intakeSub, shootSub, Robot.shootInt);
   private final ShooterRun shootOnly = new ShooterRun(shootSub);
   private final DriveTrain arcadeDrive = new DriveTrain(driveSub, rampSub);
@@ -77,8 +78,11 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //makes default commands that run all the time
-    CommandScheduler.getInstance().setDefaultCommand(driveSub,arcadeDrive);
+    CommandScheduler.getInstance().setDefaultCommand(driveSub, arcadeDrive);
     CommandScheduler.getInstance().setDefaultCommand(analogSub, isBall);
+    // CommandScheduler.getInstance().setDefaultCommand(navXSub, returnPitch);
+    
+    // CommandScheduler.getInstance().setDefaultCommand(navXSub, new InstantCommand(navXSub::returnPitch, navXSub));
     
     //commands that are mapped to buttons, to run when button is pressed/held/etc.
     OI.triggerAux.onTrue(shoot2Comm);
