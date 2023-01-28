@@ -30,7 +30,6 @@ public class Robot extends TimedRobot {
   *  This is a mess of actual Robot code and stuff I couldn't get to work through commands
   *  Please bear with me
   */
-  
 
 
   //string selected auto will be stored in
@@ -178,8 +177,8 @@ public class Robot extends TimedRobot {
     SmartDashboard.putNumber("Distance", limeSub.getDistanceInches()); //83.2
 
     //Should not be directly accessing gyro from robotmap, should use A COMMAND with gyro subsystem
-    SmartDashboard.putBoolean("Connected", RobotMap.gyro.isConnected()); 
-    SmartDashboard.putNumber("Gryo value", RobotMap.gyro.getAngle());
+    // SmartDashboard.putBoolean("Connected", RobotMap.gyro.isConnected()); 
+    // SmartDashboard.putNumber("Gryo value", RobotMap.gyro.getAngle());
     //SmartDashboard.putBoolean("POVDown", OI.povButtonDown.get());
   }
 
