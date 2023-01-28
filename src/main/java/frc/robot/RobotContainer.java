@@ -49,6 +49,10 @@ public class RobotContainer {
   private final ElevatorUp elevUp = new ElevatorUp(elevSub);
 
   private final LimelightSubsystem limeSub = new LimelightSubsystem();
+  
+  private final toggleLimelightCommand turnLimeLiteOn = new toggleLimelightCommand(limeSub, true);
+  private final toggleLimelightCommand turnLimeLiteOff = new toggleLimelightCommand(limeSub, false);
+
 
   private final isBallCollected isBall = new isBallCollected(analogSub);
   private final limeAim aim = new limeAim(driveSub, limePIDSub);
@@ -80,6 +84,8 @@ public class RobotContainer {
     CommandScheduler.getInstance().setDefaultCommand(driveSub,arcadeDrive);
     CommandScheduler.getInstance().setDefaultCommand(analogSub, isBall);
     
+    OI.button10Aux.onTrue(turnLimeLiteOn);
+    OI.button11Aux.onTrue(turnLimeLiteOff);
     //commands that are mapped to buttons, to run when button is pressed/held/etc.
     OI.triggerAux.onTrue(shoot2Comm);
     

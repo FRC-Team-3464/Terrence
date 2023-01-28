@@ -43,7 +43,7 @@ public class Robot extends TimedRobot {
   //Pixy stuff I forgot what it does
   private Integer iCount = Integer.valueOf(0);
  
-  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+  // private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final PixyI2C ballFinder = new PixyI2C();
 
   //A...limelight subsystem? In Robot?
@@ -134,7 +134,7 @@ public class Robot extends TimedRobot {
     ta = this.table.getEntry("ta");
 
     //Conversion factor for encoder -  ticks to inches -  never used and dont know if its even accurate
-    double ENCODER_CONVERSION = (6*Math.PI)/(42*12.75);
+    // double ENCODER_CONVERSION = (6*Math.PI)/(42*12.75);
     
     /*if(OI.rightStick.getRawButton(3)){
      RobotMap.leftFrontEncoder.setPosition(0);
@@ -255,9 +255,8 @@ public class Robot extends TimedRobot {
     // }
 
     // //turns limelight on
-    // if(OI.button12Aux.get()){ //5
-    //   NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setDouble(3.0D); 
-    //   //RobotMap.shootingSolenoid1.set(true);
+    // OI.button12Aux.onTrue(NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setDouble(3.0D)); 
+      //RobotMap.shootingSolenoid1.set(true);
     // }
     // //turns limelight off (these may be backwards but you get it)
     // else if (OI.button11Aux.get()){ //6
