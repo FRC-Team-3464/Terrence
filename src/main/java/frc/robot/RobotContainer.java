@@ -29,7 +29,8 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSub = new IntakeSubsystem();
   private final ElevatorSubsystem elevSub = new ElevatorSubsystem();
   private final AnalogSubsystem analogSub = new AnalogSubsystem();
-  private final RampComponent rampSub = new RampComponent(1.33, 2.5);
+  private final RampComponent rampSub = new RampComponent(1.33, 2.5);  
+  private final NavXSubsystem navX = new NavXSubsystem();
   
 
 
@@ -57,6 +58,7 @@ public class RobotContainer {
   private final isBallCollected isBall = new isBallCollected(analogSub);
   private final limeAim aim = new limeAim(driveSub, limePIDSub);
   private final limeAimDistance distance = new limeAimDistance(driveSub, limeDistance);
+  private final BalanceDistance balance = new BalanceDistance(driveSub, balancePIDSub);
 
   private final GyroSubsystem gyroSub = new GyroSubsystem(driveSub);
   
@@ -124,6 +126,8 @@ public class RobotContainer {
     //OI.buttonLB.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub));
     //OI.buttonRB.whenPressed(shoot2Comm);
     OI.buttonPancake.onTrue(new InstantCommand(gyroSub::calibrate));
+
+    OI.button8Aux.whileHeld(balance);
   }
 
   /**

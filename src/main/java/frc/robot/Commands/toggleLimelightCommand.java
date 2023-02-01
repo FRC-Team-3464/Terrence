@@ -32,11 +32,17 @@ public class toggleLimelightCommand extends CommandBase {
 
   // Called once the command ends or is interrupted.
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+    navXSub.resetGyro();
+  }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
+    if(Math.abs(turnPID.getPositionError()) < 25){
+      return true;
+    }else{
     return false;
   }
+}
 }
