@@ -16,7 +16,7 @@ public class NavXSubsystem extends SubsystemBase {
   public NavXSubsystem() {}
 
   public double getDegrees(){
-    return ahrs.getYaw();
+    return ahrs.getPitch();
   }
 
   public void resetGyro(){
