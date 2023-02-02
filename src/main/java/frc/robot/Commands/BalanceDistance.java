@@ -31,7 +31,7 @@ public class BalanceDistance extends CommandBase {
   }
   @Override
   public void execute() {
-    balanceSub.useOutput(balanceSub.getMeasurement(), 0);
+    balanceSub.useOutput(balanceSub.getMeasurement(), 0); // Run the autobalance PID Command
     System.out.println("Running Command PID");
   }
 
