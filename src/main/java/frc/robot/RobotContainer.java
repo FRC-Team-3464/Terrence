@@ -90,7 +90,7 @@ public class RobotContainer {
     
     // CommandScheduler.getInstance().setDefaultCommand(navXSub, new InstantCommand(navXSub::returnPitch, navXSub));
     // Tilt command that should run when we press button once. 
-    OI.button8Aux.toggleOnTrue(tiltCmd);
+    OI.buttonA.toggleOnTrue(tiltCmd);
 
     OI.button10Aux.onTrue(turnLimeLiteOn);
     OI.button11Aux.onTrue(turnLimeLiteOff);
