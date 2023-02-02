@@ -8,10 +8,11 @@ import com.kauailabs.navx.frc.AHRS;
 
 import edu.wpi.first.wpilibj.SerialPort.Port;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import edu.wpi.first.wpilibj.SPI; 
 
 public class NavXSubsystem extends SubsystemBase {
-  /** Creates a new NavXSubsystem. */
-  private final AHRS ahrs = new AHRS(Port.kMXP);
+  /* Creates a new NavXSubsystem. */
+  private final AHRS ahrs = new AHRS(SPI.Port.kMXP);
 
   public NavXSubsystem() {}
 

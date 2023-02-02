@@ -31,6 +31,7 @@ public class RobotContainer {
   private final AnalogSubsystem analogSub = new AnalogSubsystem();
   private final RampComponent rampSub = new RampComponent(1.33, 2.5);  
   private final NavXSubsystem navX = new NavXSubsystem();
+  private final BalancePIDSubsystem balanceSub = new BalancePIDSubsystem();
   
 
 
@@ -51,14 +52,14 @@ public class RobotContainer {
 
   private final LimelightSubsystem limeSub = new LimelightSubsystem();
   
-  private final toggleLimelightCommand turnLimeLiteOn = new toggleLimelightCommand(limeSub, true);
-  private final toggleLimelightCommand turnLimeLiteOff = new toggleLimelightCommand(limeSub, false);
+  //private final toggleLimelightCommand turnLimeLiteOn = new toggleLimelightCommand(limeSub, true);
+  //private final toggleLimelightCommand turnLimeLiteOff = new toggleLimelightCommand(limeSub, false);
 
 
   private final isBallCollected isBall = new isBallCollected(analogSub);
   private final limeAim aim = new limeAim(driveSub, limePIDSub);
   private final limeAimDistance distance = new limeAimDistance(driveSub, limeDistance);
-  private final BalanceDistance balance = new BalanceDistance(driveSub, balancePIDSub);
+  private final BalanceDistance balance = new BalanceDistance(driveSub, balanceSub);
 
   private final GyroSubsystem gyroSub = new GyroSubsystem(driveSub);
   
@@ -86,8 +87,8 @@ public class RobotContainer {
     CommandScheduler.getInstance().setDefaultCommand(driveSub,arcadeDrive);
     CommandScheduler.getInstance().setDefaultCommand(analogSub, isBall);
     
-    OI.button10Aux.onTrue(turnLimeLiteOn);
-    OI.button11Aux.onTrue(turnLimeLiteOff);
+    //OI.button10Aux.onTrue(turnLimeLiteOn);
+    //OI.button11Aux.onTrue(turnLimeLiteOff);
     //commands that are mapped to buttons, to run when button is pressed/held/etc.
     OI.triggerAux.onTrue(shoot2Comm);
     
@@ -127,7 +128,7 @@ public class RobotContainer {
     //OI.buttonRB.whenPressed(shoot2Comm);
     OI.buttonPancake.onTrue(new InstantCommand(gyroSub::calibrate));
 
-    OI.button8Aux.whileHeld(balance);
+    OI.button8Aux.toggleOnTrue(balance);
   }
 
   /**

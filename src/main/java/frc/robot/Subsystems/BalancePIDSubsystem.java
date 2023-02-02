@@ -13,17 +13,28 @@ public class BalancePIDSubsystem extends PIDSubsystem {
     private final DriveSubsystem driveSub = new DriveSubsystem();
     //private final LimelightSubsystem limeSub = new LimelightSubsystem();
     private final NavXSubsystem navXSub = new NavXSubsystem();
+    private double speed;
     
     //create PID with predetermined constants
     public BalancePIDSubsystem(){
-        super(new PIDController(0.05, 0, .0025));
+        super(new PIDController(-0.03, 0, .001));
         getController().setSetpoint(0);
         getController().setTolerance(3);
     }
 
     @Override
     public void useOutput(double output, double setpoint){
-        driveSub.arcadeDrive(getController().calculate(output, setpoint), 0);
+        speed = getController().calculate(output, setpoint);
+        if(speed > .35){
+            speed = .35;
+        }
+        else if(speed < -.35){
+            speed = -.35;
+        }
+        
+        
+        driveSub.arcadeDrive(speed, 0);
+        System.out.println(speed);
     }
     @Override  
     public double getMeasurement(){

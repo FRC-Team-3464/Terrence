@@ -32,11 +32,12 @@ public class BalanceDistance extends CommandBase {
   @Override
   public void execute() {
     balanceSub.useOutput(balanceSub.getMeasurement(), 0);
+    System.out.println("Running Command PID");
   }
 
  @Override
   public boolean isFinished() {
-      return true;
+      return false;
   }
 
 }
