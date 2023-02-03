@@ -128,7 +128,7 @@ public class RobotContainer {
     //OI.buttonRB.whenPressed(shoot2Comm);
     OI.buttonPancake.onTrue(new InstantCommand(gyroSub::calibrate));
 
-    OI.button8Aux.toggleOnTrue(balance);
+    OI.buttonA.toggleOnTrue(balance);
   }
 
   /**
