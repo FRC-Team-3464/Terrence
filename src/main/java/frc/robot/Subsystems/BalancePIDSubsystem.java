@@ -1,5 +1,9 @@
 package frc.robot.Subsystems;
+import java.sql.Time;
+
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.PIDSubsystem;
 
 /**
@@ -14,12 +18,16 @@ public class BalancePIDSubsystem extends PIDSubsystem {
     //private final LimelightSubsystem limeSub = new LimelightSubsystem();
     private final NavXSubsystem navXSub = new NavXSubsystem();
     private double speed;
+    private double distance; // create distance
+    private Timer timer = new Timer();
     
     //create PID with predetermined constants
     public BalancePIDSubsystem(){
         super(new PIDController(-0.03, 0, .001));
         getController().setSetpoint(0);
         getController().setTolerance(3);
+        timer.start();
+        distance = 0;
     }
 
     @Override
@@ -32,7 +40,6 @@ public class BalancePIDSubsystem extends PIDSubsystem {
             speed = -.35;
         }
         
-        
         driveSub.arcadeDrive(speed, 0);
         System.out.println(speed);
     }
@@ -43,6 +50,15 @@ public class BalancePIDSubsystem extends PIDSubsystem {
 
     @Override
     public void periodic(){
+        // Distance slipped we gotta find "4". 
+        double currentTime = timer.getFPGATimestamp(); // Get the current time. 
+        double accelerationX = navXSub.returnXAccelNum(); // Get our x acceleartion multiply by s^2 gives me meters. 
+
+        double distanceTraveled = accelerationX * Math.pow(accelerationX, 2);
+        distance += distanceTraveled;
+        SmartDashboard.putNumber("Distance in Meters", distance);
+        //   Now what I'm going to do is find the distance traveled to be the accleration times time squared. 
+        timer.reset(); 
         //if(isEnabled())
             //driveSub.arcadeDrive(0, getController().calculate(getMeasurement()));
     }
