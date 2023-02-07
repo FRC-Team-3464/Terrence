@@ -30,7 +30,7 @@ public class RobotContainer {
   private final ElevatorSubsystem elevSub = new ElevatorSubsystem();
   private final AnalogSubsystem analogSub = new AnalogSubsystem();
   private final RampComponent rampSub = new RampComponent(1.33, 2.5);  
-  private final NavXSubsystem navX = new NavXSubsystem();
+  // private final NavXSubsystem navX = new NavXSubsystem();
   private final BalancePIDSubsystem balanceSub = new BalancePIDSubsystem();
   
 
@@ -38,7 +38,7 @@ public class RobotContainer {
   private final Shoot2Balls shoot2Comm = new Shoot2Balls(intakeSub, shootSub, Robot.shootInt);
   private final ShooterRun shootOnly = new ShooterRun(shootSub);
   private final DriveTrain arcadeDrive = new DriveTrain(driveSub, rampSub);
-  private final DriveTank tankDrive = new DriveTank(driveSub);
+  // private final DriveTank tankDrive = new DriveTank(driveSub);
   private final LimelightPIDSubsystem limePIDSub = new LimelightPIDSubsystem();
   private final LimelightPIDDistanceSubsystem limeDistance = new LimelightPIDDistanceSubsystem(driveSub);
 
@@ -50,7 +50,7 @@ public class RobotContainer {
   private final ElevatorDown elevDown = new ElevatorDown(elevSub);
   private final ElevatorUp elevUp = new ElevatorUp(elevSub);
 
-  private final LimelightSubsystem limeSub = new LimelightSubsystem();
+  // private final LimelightSubsystem limeSub = new LimelightSubsystem();
   
   //private final toggleLimelightCommand turnLimeLiteOn = new toggleLimelightCommand(limeSub, true);
   //private final toggleLimelightCommand turnLimeLiteOff = new toggleLimelightCommand(limeSub, false);
@@ -129,6 +129,7 @@ public class RobotContainer {
     OI.buttonPancake.onTrue(new InstantCommand(gyroSub::calibrate));
 
     OI.buttonA.toggleOnTrue(balance);
+    OI.buttonX.onTrue(new InstantCommand(encoderSub::resetEncoders));
   }
 
   /**

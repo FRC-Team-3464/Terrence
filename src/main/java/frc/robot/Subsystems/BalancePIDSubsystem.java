@@ -66,7 +66,7 @@ public class BalancePIDSubsystem extends PIDSubsystem {
 
         //  Read encoder values. 
         encoderDistance = encoderSub.getLeftEncoder() * 2;
-        SmartDashboard.putNumber("Encoder", encoderDistance); // Get encoder distance
+        SmartDashboard.putNumber("Encoder Distance", encoderDistance); // Get encoder distance
             //driveSub.arcadeDrive(0, getController().calculate(getMeasurement()));
     }
     
