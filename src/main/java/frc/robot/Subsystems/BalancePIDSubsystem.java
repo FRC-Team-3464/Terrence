@@ -15,19 +15,22 @@ public class BalancePIDSubsystem extends PIDSubsystem {
     //these should be using the subsystems declared in RobotContainer, not creating new ones
     //Works fine as is
     private final DriveSubsystem driveSub = new DriveSubsystem();
+    private final EncoderSubsystem encoderSub = new EncoderSubsystem();
     //private final LimelightSubsystem limeSub = new LimelightSubsystem();
     private final NavXSubsystem navXSub = new NavXSubsystem();
     private double speed;
     private double distance; // create distance
     private Timer timer = new Timer();
-    
+   
+    private double encoderDistance;
     //create PID with predetermined constants
-    public BalancePIDSubsystem(){
+    public BalancePIDSubsystem(){ // What runs when we first create this command. 
         super(new PIDController(-0.03, 0, .001));
         getController().setSetpoint(0);
         getController().setTolerance(3);
         timer.start();
         distance = 0;
+        encoderDistance = 0;
     }
 
     @Override
@@ -60,6 +63,10 @@ public class BalancePIDSubsystem extends PIDSubsystem {
         //   Now what I'm going to do is find the distance traveled to be the accleration times time squared. 
         timer.reset(); 
         //if(isEnabled())
+
+        //  Read encoder values. 
+        encoderDistance = encoderSub.getLeftEncoder() * 2;
+        SmartDashboard.putNumber("Encoder", encoderDistance); // Get encoder distance
             //driveSub.arcadeDrive(0, getController().calculate(getMeasurement()));
     }
     
