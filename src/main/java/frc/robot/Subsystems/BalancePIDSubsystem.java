@@ -25,7 +25,7 @@ public class BalancePIDSubsystem extends PIDSubsystem {
     private double encoderDistance;
     //create PID with predetermined constants
     public BalancePIDSubsystem(){ // What runs when we first create this command. 
-        super(new PIDController(-0.03, 0, .001));
+        super(new PIDController(-0.03, 0.00, .001)); 
         getController().setSetpoint(0);
         getController().setTolerance(3);
         timer.start();
@@ -50,7 +50,7 @@ public class BalancePIDSubsystem extends PIDSubsystem {
     public double getMeasurement(){
         return navXSub.getDegrees();
     }
-
+    
     @Override
     public void periodic(){
         // Distance slipped we gotta find "4". 
@@ -64,9 +64,7 @@ public class BalancePIDSubsystem extends PIDSubsystem {
         timer.reset(); 
         //if(isEnabled())
 
-        //  Read encoder values. 
-        encoderDistance = encoderSub.getLeftEncoder() * 2;
-        SmartDashboard.putNumber("Encoder Distance", encoderDistance); // Get encoder distance
+        
             //driveSub.arcadeDrive(0, getController().calculate(getMeasurement()));
     }
     
