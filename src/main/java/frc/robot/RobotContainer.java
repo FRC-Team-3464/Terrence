@@ -32,7 +32,7 @@ public class RobotContainer {
   private final RampComponent rampSub = new RampComponent(1.33, 2.5);  
   // private final NavXSubsystem navX = new NavXSubsystem();
   private final BalancePIDSubsystem balanceSub = new BalancePIDSubsystem();
-  
+  private final BalanceHoldPIDSubsystem balanceHoldSub = new BalanceHoldPIDSubsystem();
 
 
   private final Shoot2Balls shoot2Comm = new Shoot2Balls(intakeSub, shootSub, Robot.shootInt);
@@ -41,7 +41,7 @@ public class RobotContainer {
   // private final DriveTank tankDrive = new DriveTank(driveSub);
   private final LimelightPIDSubsystem limePIDSub = new LimelightPIDSubsystem();
   private final LimelightPIDDistanceSubsystem limeDistance = new LimelightPIDDistanceSubsystem(driveSub);
-
+   
   private final IntakeBoth intakeBoth = new IntakeBoth(intakeSub);
   private final IntakeBottom intakeBottom = new IntakeBottom(intakeSub);
   private final IntakeTop intakeTop = new IntakeTop(intakeSub);
@@ -60,7 +60,7 @@ public class RobotContainer {
   private final limeAim aim = new limeAim(driveSub, limePIDSub);
   private final limeAimDistance distance = new limeAimDistance(driveSub, limeDistance);
   private final BalanceDistance balance = new BalanceDistance(driveSub, balanceSub);
-
+  private final BalanceHold balanceHolder = new BalanceHold(balanceHoldSub, encoderSub);
   private final GyroSubsystem gyroSub = new GyroSubsystem(driveSub);
   
   
@@ -129,6 +129,7 @@ public class RobotContainer {
     OI.buttonPancake.onTrue(new InstantCommand(gyroSub::calibrate));
 
     OI.buttonA.toggleOnTrue(balance);
+    OI.buttonB.toggleOnTrue(balanceHolder);
     OI.buttonX.onTrue(new InstantCommand(encoderSub::resetEncoders));
   }
 
