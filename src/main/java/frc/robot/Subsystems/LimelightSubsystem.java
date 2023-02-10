@@ -45,6 +45,16 @@ public class LimelightSubsystem extends SubsystemBase {
   double distanceFromLimelightToGoalInches = (goalHeightInches - limelightLensHeightInches)/Math.tan(angleToGoalRadians);
   
 
+  public void toggleLimelight(boolean on){
+    if(on){
+      NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setDouble(3.0D);
+    }else{
+      NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setDouble(1.0D);
+    }
+  }
+
+
+
 
   public LimelightSubsystem(/*DriveSubsystem DriveSubb*/) {
     //addRequirements(driveSub);

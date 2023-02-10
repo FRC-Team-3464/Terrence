@@ -18,7 +18,6 @@ import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 import frc.robot.Subsystems.*;
 
-
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
  * each mode, as described in the TimedRobot documentation. If you change the name of this class or
@@ -44,7 +43,7 @@ public class Robot extends TimedRobot {
   //Pixy stuff I forgot what it does
   private Integer iCount = Integer.valueOf(0);
  
-  private final I2C.Port i2cPort = I2C.Port.kOnboard;
+  // private final I2C.Port i2cPort = I2C.Port.kOnboard;
   private final PixyI2C ballFinder = new PixyI2C();
 
   //A...limelight subsystem? In Robot?
@@ -135,7 +134,7 @@ public class Robot extends TimedRobot {
     ta = this.table.getEntry("ta");
 
     //Conversion factor for encoder -  ticks to inches -  never used and dont know if its even accurate
-    double ENCODER_CONVERSION = (6*Math.PI)/(42*12.75);
+    // double ENCODER_CONVERSION = (6*Math.PI)/(42*12.75);
     
     /*if(OI.rightStick.getRawButton(3)){
      RobotMap.leftFrontEncoder.setPosition(0);
@@ -241,30 +240,29 @@ public class Robot extends TimedRobot {
     //if statements that run if a button is pressed
     //should be tuned into commands that are used in robot container, but NOOOOOOOOOO, that would be TOO MUCH WORK
 
-    //turns flywheel speed down to 50%
-    if(OI.button9Aux.get()){ //7
-      //ShooterIndexer.reverse();
-      //RobotMap.shooter.set(0.5);
-      shootInt = -.30;
-    }
+    // //turns flywheel speed down to 50%
+    // if(OI.button9Aux.get()){ //7
+    //   //ShooterIndexer.reverse();
+    //   //RobotMap.shooter.set(0.5);
+    //   shootInt = -.30;
+    // }
 
-    //turns flywheel speed up to 55%
-    else if(OI.button10Aux.get()){ //8
-      //ShooterIndexer.reverse();
-      //RobotMap.shooter.set(0.5);
-      shootInt= -.50;
-    }
+    // //turns flywheel speed up to 55%
+    // else if(OI.button10Aux.get()){ //8
+    //   //ShooterIndexer.reverse();
+    //   //RobotMap.shooter.set(0.5);
+    //   shootInt= -.50;
+    // }
 
-    //turns limelight on
-    if(OI.button12Aux.get()){ //5
-      NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setDouble(3.0D); 
+    // //turns limelight on
+    // OI.button12Aux.onTrue(NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setDouble(3.0D)); 
       //RobotMap.shootingSolenoid1.set(true);
-    }
-    //turns limelight off (these may be backwards but you get it)
-    else if (OI.button11Aux.get()){ //6
-      NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setDouble(1.0D); 
-      //RobotMap.shootingSolenoid1.set(false);
-    }
+    // }
+    // //turns limelight off (these may be backwards but you get it)
+    // else if (OI.button11Aux.get()){ //6
+    //   NetworkTableInstance.getDefault().getTable("limelight").getEntry("ledMode").setDouble(1.0D); 
+    //   //RobotMap.shootingSolenoid1.set(false);
+    // }
     
   }
 

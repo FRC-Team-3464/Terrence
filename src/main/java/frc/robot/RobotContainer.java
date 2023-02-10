@@ -4,8 +4,8 @@
 package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
-//import edu.wpi.first.wpilibj.templates.commandbased.commands.ExampleCommand;
-//import edu.wpi.first.wpilibj.templates.commandbased.subsystems.ExampleSubsystem;
+//import frc.robot.commands.ExampleCommand;
+//import frc.robot.subsystems.ExampleSubsystem;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
@@ -32,9 +32,6 @@ public class RobotContainer {
   private final RampComponent rampSub = new RampComponent(1.33, 2.5);
   
 
-  
-
-  
 
   private final Shoot2Balls shoot2Comm = new Shoot2Balls(intakeSub, shootSub, Robot.shootInt);
   private final ShooterRun shootOnly = new ShooterRun(shootSub);
@@ -52,6 +49,10 @@ public class RobotContainer {
   private final ElevatorUp elevUp = new ElevatorUp(elevSub);
 
   private final LimelightSubsystem limeSub = new LimelightSubsystem();
+  
+  private final toggleLimelightCommand turnLimeLiteOn = new toggleLimelightCommand(limeSub, true);
+  private final toggleLimelightCommand turnLimeLiteOff = new toggleLimelightCommand(limeSub, false);
+
 
   private final isBallCollected isBall = new isBallCollected(analogSub);
   private final limeAim aim = new limeAim(driveSub, limePIDSub);
@@ -83,44 +84,46 @@ public class RobotContainer {
     CommandScheduler.getInstance().setDefaultCommand(driveSub,arcadeDrive);
     CommandScheduler.getInstance().setDefaultCommand(analogSub, isBall);
     
+    OI.button10Aux.onTrue(turnLimeLiteOn);
+    OI.button11Aux.onTrue(turnLimeLiteOff);
     //commands that are mapped to buttons, to run when button is pressed/held/etc.
-    OI.triggerAux.whenPressed(shoot2Comm);
+    OI.triggerAux.onTrue(shoot2Comm);
     
-    OI.button3Aux.whileHeld(intakeBoth);
-    OI.button3Aux.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub)); //double dots :: used to pass a method of the class
+    OI.button3Aux.onTrue(intakeBoth);
+    OI.button3Aux.onFalse(new InstantCommand(intakeSub::stopIntakes, intakeSub)); //double dots :: used to pass a method of the class
 
-    OI.button5Aux.whileHeld(intakeBottom);
-    OI.button5Aux.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub));
+    OI.button5Aux.whileTrue(intakeBottom);
+    OI.button5Aux.onFalse(new InstantCommand(intakeSub::stopIntakes, intakeSub));
 
-    OI.button6Aux.whileHeld(intakeTop);
-    OI.button6Aux.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub));
+    OI.button6Aux.whileTrue(intakeTop);
+    OI.button6Aux.onFalse(new InstantCommand(intakeSub::stopIntakes, intakeSub));
 
-    OI.button4Aux.whileHeld(shootOnly);
-    OI.button4Aux.whenReleased(new InstantCommand(shootSub::stopShooter, shootSub));
+    OI.button4Aux.whileTrue(shootOnly);
+    OI.button4Aux.onFalse(new InstantCommand(shootSub::stopShooter, shootSub));
 
-    OI.button2Aux.whileHeld(reverse);
-    OI.button2Aux.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub));
-    OI.button2Aux.whenReleased(new InstantCommand(shootSub::stopShooter, shootSub));
+    OI.button2Aux.whileTrue(reverse);
+    OI.button2Aux.onFalse(new InstantCommand(intakeSub::stopIntakes, intakeSub));
+    OI.button2Aux.onFalse(new InstantCommand(shootSub::stopShooter, shootSub));
 
     //OI.button7Left.whenPressed(new InstantCommand(encoderSub::resetEncoders, encoderSub));
 
-    OI.povButtonDown.whileHeld(elevDown);
-    OI.povButtonDown.whenReleased(new InstantCommand(elevSub::stopElevator));
-    OI.povButtonUp.whileHeld(elevUp);
-    OI.povButtonUp.whenReleased(new InstantCommand(elevSub::stopElevator));
+    OI.povButtonDown.whileTrue(elevDown);
+    OI.povButtonDown.onFalse(new InstantCommand(elevSub::stopElevator));
+    OI.povButtonUp.whileTrue(elevUp);
+    OI.povButtonUp.onFalse(new InstantCommand(elevSub::stopElevator));
 
     // OI.button12Aux.whileHeld(new InstantCommand(limeSub::targetLime));
-    OI.button10Aux.whenReleased(new InstantCommand(driveSub::stopDrive));
+    OI.button10Aux.onFalse(new InstantCommand(driveSub::stopDrive));
 
     // OI.buttonX.whileHeld(new InstantCommand(limePIDSub::enable, limePIDSub));
     //OI.buttonX.whenReleased(new InstantCommand(limePIDSub::disable, limePIDSub));
-    OI.buttonLB.whileHeld(aim);
-    OI.buttonRB.whileHeld(distance);
+    OI.buttonLB.whileTrue(aim);
+    OI.buttonRB.whileTrue(distance);
     //OI.buttonY.whileHeld(new InstantCommand(limeDistance::loserAiming));
     //OI.buttonLB.whileHeld(intakeBottom);
     //OI.buttonLB.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub));
     //OI.buttonRB.whenPressed(shoot2Comm);
-    OI.buttonPancake.whenPressed(new InstantCommand(gyroSub::calibrate));
+    OI.buttonPancake.onTrue(new InstantCommand(gyroSub::calibrate));
   }
 
   /**
