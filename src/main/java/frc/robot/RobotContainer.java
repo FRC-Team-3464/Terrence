@@ -33,6 +33,7 @@ public class RobotContainer {
   // private final NavXSubsystem navX = new NavXSubsystem();
   private final BalancePIDSubsystem balanceSub = new BalancePIDSubsystem();
   private final BalanceHoldPIDSubsystem balanceHoldSub = new BalanceHoldPIDSubsystem();
+  private final BalancePIDSubsystem2Bots balanceTwoBots = new BalancePIDSubsystem2Bots();
 
 
   private final Shoot2Balls shoot2Comm = new Shoot2Balls(intakeSub, shootSub, Robot.shootInt);
@@ -61,6 +62,7 @@ public class RobotContainer {
   private final limeAimDistance distance = new limeAimDistance(driveSub, limeDistance);
   private final BalanceDistance balance = new BalanceDistance(driveSub, balanceSub);
   private final BalanceHold balanceHolder = new BalanceHold(balanceHoldSub, encoderSub);
+  private final Balance2Bots TwoBotBalanceCMD = new Balance2Bots(balanceTwoBots, encoderSub);
   private final GyroSubsystem gyroSub = new GyroSubsystem(driveSub);
   
   
@@ -130,6 +132,7 @@ public class RobotContainer {
 
     OI.buttonA.toggleOnTrue(balance);
     OI.buttonB.toggleOnTrue(balanceHolder);
+    OI.buttonY.toggleOnTrue(TwoBotBalanceCMD);
     OI.buttonX.onTrue(new InstantCommand(encoderSub::resetEncoders));
   }
 

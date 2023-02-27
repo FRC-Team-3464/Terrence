@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj2.command.PIDSubsystem;
  * Utilises a PID loop
  * Check FRC PIDSubsystem documentation for more information
  */
-public class BalancePIDSubsystem extends PIDSubsystem {
+public class BalancePIDSubsystem2Bots extends PIDSubsystem {
     //these should be using the subsystems declared in RobotContainer, not creating new ones
     //Works fine as is
     private final DriveSubsystem driveSub = new DriveSubsystem();
@@ -24,15 +24,15 @@ public class BalancePIDSubsystem extends PIDSubsystem {
    
     private double encoderDistance;
     //create PID with predetermined constants
-    public BalancePIDSubsystem(){ // What runs when we first create this command. 
-        super(new PIDController(-0.03, 0.00, .001)); 
+    public BalancePIDSubsystem2Bots(){ // What runs when we first create this command. 
+        super(new PIDController(-0.01, 0.00, .001)); 
         getController().setSetpoint(0);
-        getController().setTolerance(1);
+        getController().setTolerance(3);
         timer.start();
         distance = 0;
         encoderDistance = 0;
     }
-
+ 
     @Override
     public void useOutput(double output, double setpoint){
         speed = getController().calculate(output, setpoint);
