@@ -55,7 +55,7 @@ public class Robot extends TimedRobot {
 
   //shoot speed for shooter, from -1 to 1
   // Changing speed to -0.55 -  original as of 10/6/22 was -0.5
-  static double shootInt = -.55;
+  static double shootInt = -.55; // This is the new one
   //variables for storing left/right encoder values
   double leftEncoder = 0;
   double rightEncoder = 0;

@@ -21,10 +21,13 @@ public class EncoderSubsystem extends SubsystemBase {
     rightFrontEncoder = RobotMap.leftFrontEncoder,
     rightBackEncoder = RobotMap.leftFrontEncoder;
 
+
   public EncoderSubsystem() {
     //resets encoders when robot turn on
     resetEncoders();
+    // leftFrontEncoder.setPositionConversionFactor(2*((1/42) * (2 * Math.PI * 3) * (1/10.71)));
   }
+  // ticks * (one rotation/numTicks) * (2piR/one rotation ) * gear ratios. 
   //resets all encoders to 0
   public void resetEncoders(){
     leftFrontEncoder.setPosition(0);
@@ -41,7 +44,7 @@ public class EncoderSubsystem extends SubsystemBase {
   //get right encoder 
   //no need for both right encoders due to equal values
   public double getRightEncoder(){
-    return rightFrontEncoder.getPosition();
+    return rightFrontEncoder.getPosition() ;
   }
 
   //set left encoder to specified value

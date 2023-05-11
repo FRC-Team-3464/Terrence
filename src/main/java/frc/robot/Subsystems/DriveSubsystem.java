@@ -79,6 +79,11 @@ public class DriveSubsystem extends SubsystemBase {
     arcadeDrive(0, 0);
   }
 
+  // public double getLeftDistance (){
+  //   return leftFront.getP
+  // }
+
+  
   public double getLeft(){
     return leftFront.get();
   }

@@ -29,17 +29,20 @@ public class RobotContainer {
   private final IntakeSubsystem intakeSub = new IntakeSubsystem();
   private final ElevatorSubsystem elevSub = new ElevatorSubsystem();
   private final AnalogSubsystem analogSub = new AnalogSubsystem();
-  private final RampComponent rampSub = new RampComponent(1.33, 2.5);
-  
+  private final RampComponent rampSub = new RampComponent(1.33, 2.5);  
+  // private final NavXSubsystem navX = new NavXSubsystem();
+  private final BalancePIDSubsystem balanceSub = new BalancePIDSubsystem();
+  private final BalanceHoldPIDSubsystem balanceHoldSub = new BalanceHoldPIDSubsystem();
+  private final BalancePIDSubsystem2Bots balanceTwoBots = new BalancePIDSubsystem2Bots();
 
 
   private final Shoot2Balls shoot2Comm = new Shoot2Balls(intakeSub, shootSub, Robot.shootInt);
   private final ShooterRun shootOnly = new ShooterRun(shootSub);
   private final DriveTrain arcadeDrive = new DriveTrain(driveSub, rampSub);
-  private final DriveTank tankDrive = new DriveTank(driveSub);
+  // private final DriveTank tankDrive = new DriveTank(driveSub);
   private final LimelightPIDSubsystem limePIDSub = new LimelightPIDSubsystem();
   private final LimelightPIDDistanceSubsystem limeDistance = new LimelightPIDDistanceSubsystem(driveSub);
-
+   
   private final IntakeBoth intakeBoth = new IntakeBoth(intakeSub);
   private final IntakeBottom intakeBottom = new IntakeBottom(intakeSub);
   private final IntakeTop intakeTop = new IntakeTop(intakeSub);
@@ -48,16 +51,18 @@ public class RobotContainer {
   private final ElevatorDown elevDown = new ElevatorDown(elevSub);
   private final ElevatorUp elevUp = new ElevatorUp(elevSub);
 
-  private final LimelightSubsystem limeSub = new LimelightSubsystem();
+  // private final LimelightSubsystem limeSub = new LimelightSubsystem();
   
-  private final toggleLimelightCommand turnLimeLiteOn = new toggleLimelightCommand(limeSub, true);
-  private final toggleLimelightCommand turnLimeLiteOff = new toggleLimelightCommand(limeSub, false);
+  //private final toggleLimelightCommand turnLimeLiteOn = new toggleLimelightCommand(limeSub, true);
+  //private final toggleLimelightCommand turnLimeLiteOff = new toggleLimelightCommand(limeSub, false);
 
 
   private final isBallCollected isBall = new isBallCollected(analogSub);
   private final limeAim aim = new limeAim(driveSub, limePIDSub);
   private final limeAimDistance distance = new limeAimDistance(driveSub, limeDistance);
-
+  private final BalanceDistance balance = new BalanceDistance(driveSub, balanceSub);
+  private final BalanceHold balanceHolder = new BalanceHold(balanceHoldSub, encoderSub);
+  private final Balance2Bots TwoBotBalanceCMD = new Balance2Bots(balanceTwoBots, encoderSub);
   private final GyroSubsystem gyroSub = new GyroSubsystem(driveSub);
   
   
@@ -84,8 +89,8 @@ public class RobotContainer {
     CommandScheduler.getInstance().setDefaultCommand(driveSub,arcadeDrive);
     CommandScheduler.getInstance().setDefaultCommand(analogSub, isBall);
     
-    OI.button10Aux.onTrue(turnLimeLiteOn);
-    OI.button11Aux.onTrue(turnLimeLiteOff);
+    //OI.button10Aux.onTrue(turnLimeLiteOn);
+    //OI.button11Aux.onTrue(turnLimeLiteOff);
     //commands that are mapped to buttons, to run when button is pressed/held/etc.
     OI.triggerAux.onTrue(shoot2Comm);
     
@@ -124,6 +129,11 @@ public class RobotContainer {
     //OI.buttonLB.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub));
     //OI.buttonRB.whenPressed(shoot2Comm);
     OI.buttonPancake.onTrue(new InstantCommand(gyroSub::calibrate));
+
+    OI.buttonA.toggleOnTrue(balance);
+    OI.buttonB.toggleOnTrue(balanceHolder);
+    OI.buttonY.toggleOnTrue(TwoBotBalanceCMD);
+    OI.buttonX.onTrue(new InstantCommand(encoderSub::resetEncoders));
   }
 
   /**
