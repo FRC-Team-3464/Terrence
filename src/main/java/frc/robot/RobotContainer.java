@@ -91,13 +91,15 @@ public class RobotContainer {
     //makes default commands that run all the time
     CommandScheduler.getInstance().setDefaultCommand(driveSub,arcadeDrive);
     CommandScheduler.getInstance().setDefaultCommand(analogSub, isBall);
-    CommandScheduler.getInstance().setDefaultCommand(ledSub, new InstantCommand(ledSub::purple, ledSub));
+    // CommandScheduler.getInstance().setDefaultCommand(ledSub, new InstantCommand(ledSub::setOne, ledSub));
     
     
     //OI.button10Aux.onTrue(turnLimeLiteOn);
     //OI.button11Aux.onTrue(turnLimeLiteOff);
     //commands that are mapped to buttons, to run when button is pressed/held/etc.
-    OI.triggerAux.onTrue(shoot2Comm);
+    // OI.triggerAux.onTrue(shoot2Comm);
+    OI.triggerAux.onTrue(new InstantCommand(ledSub::purple, ledSub));
+    
     
     OI.button3Aux.onTrue(intakeBoth);
     OI.button3Aux.onFalse(new InstantCommand(intakeSub::stopIntakes, intakeSub)); //double dots :: used to pass a method of the class

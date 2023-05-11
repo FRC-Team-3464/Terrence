@@ -41,6 +41,12 @@ public class LEDSubsystem extends SubsystemBase {
      System.out.println("Yellowing");
   }
 
+  public void setOne(){
+    ledBuffer.setRGB(3, 255, 255, 255);
+    ledStrip.setData(ledBuffer);
+
+  }
+
   public void red() {
     for (var i = 0; i < ledBuffer.getLength(); i++) {
         // Sets the specified LED to the RGB values for red
@@ -91,6 +97,7 @@ public class LEDSubsystem extends SubsystemBase {
 
   @Override
   public void periodic() {
+    
     //SmartDashboard.putBoolean("Gyro Connection", gyro.isConnected());
     //SmartDashboard.putNumber("Gyro Angle", getDegrees());
   }
