@@ -31,6 +31,9 @@ public class RobotContainer {
   private final AnalogSubsystem analogSub = new AnalogSubsystem();
   private final RampComponent rampSub = new RampComponent(1.33, 2.5);  
   // private final NavXSubsystem navX = new NavXSubsystem();
+
+  private final LEDSubsystem ledSub = new LEDSubsystem();
+
   private final BalancePIDSubsystem balanceSub = new BalancePIDSubsystem();
   private final BalanceHoldPIDSubsystem balanceHoldSub = new BalanceHoldPIDSubsystem();
   private final BalancePIDSubsystem2Bots balanceTwoBots = new BalancePIDSubsystem2Bots();
@@ -88,6 +91,8 @@ public class RobotContainer {
     //makes default commands that run all the time
     CommandScheduler.getInstance().setDefaultCommand(driveSub,arcadeDrive);
     CommandScheduler.getInstance().setDefaultCommand(analogSub, isBall);
+    CommandScheduler.getInstance().setDefaultCommand(ledSub, new InstantCommand(ledSub::purple, ledSub));
+    
     
     //OI.button10Aux.onTrue(turnLimeLiteOn);
     //OI.button11Aux.onTrue(turnLimeLiteOff);
