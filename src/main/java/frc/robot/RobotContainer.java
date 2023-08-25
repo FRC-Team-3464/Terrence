@@ -91,7 +91,6 @@ public class RobotContainer {
     //makes default commands that run all the time
     CommandScheduler.getInstance().setDefaultCommand(driveSub,arcadeDrive);
     CommandScheduler.getInstance().setDefaultCommand(analogSub, isBall);
-    // CommandScheduler.getInstance().setDefaultCommand(ledSub, new InstantCommand(ledSub::setOne, ledSub));
     
     
     //OI.button10Aux.onTrue(turnLimeLiteOn);
