@@ -92,12 +92,8 @@ public class RobotContainer {
     CommandScheduler.getInstance().setDefaultCommand(driveSub,arcadeDrive);
     CommandScheduler.getInstance().setDefaultCommand(analogSub, isBall);
     
-    
-    //OI.button10Aux.onTrue(turnLimeLiteOn);
-    //OI.button11Aux.onTrue(turnLimeLiteOff);
     //commands that are mapped to buttons, to run when button is pressed/held/etc.
-    // OI.triggerAux.onTrue(shoot2Comm);
-    OI.triggerAux.onTrue(new InstantCommand(ledSub::purple, ledSub));
+    OI.triggerAux.onTrue(shoot2Comm);
     
     
     OI.button3Aux.onTrue(intakeBoth);
