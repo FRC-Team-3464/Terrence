@@ -59,9 +59,7 @@ public class DriveSubsystem extends SubsystemBase {
 
 
   public void arcadeDrive(double speed, double rotation){
-    
     //ramp.applyAsDouble(right);
-
     drive.arcadeDrive(speed, rotation);
     //set back motors the same as front motors, because only front motors are set with arcadeDrive method
     leftBack.set(leftFront.get());

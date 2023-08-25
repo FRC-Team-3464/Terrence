@@ -89,53 +89,19 @@ public class RobotContainer {
    */
   private void configureButtonBindings() {
     //makes default commands that run all the time
-    CommandScheduler.getInstance().setDefaultCommand(driveSub,arcadeDrive);
+    CommandScheduler.getInstance().setDefaultCommand(driveSub, arcadeDrive);
     CommandScheduler.getInstance().setDefaultCommand(analogSub, isBall);
     
     //commands that are mapped to buttons, to run when button is pressed/held/etc.
     OI.triggerAux.onTrue(shoot2Comm);
-    
-    
-    OI.button3Aux.onTrue(intakeBoth);
-    OI.button3Aux.onFalse(new InstantCommand(intakeSub::stopIntakes, intakeSub)); //double dots :: used to pass a method of the class
-
+        
     OI.button5Aux.whileTrue(intakeBottom);
     OI.button5Aux.onFalse(new InstantCommand(intakeSub::stopIntakes, intakeSub));
-
-    OI.button6Aux.whileTrue(intakeTop);
-    OI.button6Aux.onFalse(new InstantCommand(intakeSub::stopIntakes, intakeSub));
-
-    OI.button4Aux.whileTrue(shootOnly);
-    OI.button4Aux.onFalse(new InstantCommand(shootSub::stopShooter, shootSub));
 
     OI.button2Aux.whileTrue(reverse);
     OI.button2Aux.onFalse(new InstantCommand(intakeSub::stopIntakes, intakeSub));
     OI.button2Aux.onFalse(new InstantCommand(shootSub::stopShooter, shootSub));
 
-    //OI.button7Left.whenPressed(new InstantCommand(encoderSub::resetEncoders, encoderSub));
-
-    OI.povButtonDown.whileTrue(elevDown);
-    OI.povButtonDown.onFalse(new InstantCommand(elevSub::stopElevator));
-    OI.povButtonUp.whileTrue(elevUp);
-    OI.povButtonUp.onFalse(new InstantCommand(elevSub::stopElevator));
-
-    // OI.button12Aux.whileHeld(new InstantCommand(limeSub::targetLime));
-    OI.button10Aux.onFalse(new InstantCommand(driveSub::stopDrive));
-
-    // OI.buttonX.whileHeld(new InstantCommand(limePIDSub::enable, limePIDSub));
-    //OI.buttonX.whenReleased(new InstantCommand(limePIDSub::disable, limePIDSub));
-    OI.buttonLB.whileTrue(aim);
-    OI.buttonRB.whileTrue(distance);
-    //OI.buttonY.whileHeld(new InstantCommand(limeDistance::loserAiming));
-    //OI.buttonLB.whileHeld(intakeBottom);
-    //OI.buttonLB.whenReleased(new InstantCommand(intakeSub::stopIntakes, intakeSub));
-    //OI.buttonRB.whenPressed(shoot2Comm);
-    OI.buttonPancake.onTrue(new InstantCommand(gyroSub::calibrate));
-
-    OI.buttonA.toggleOnTrue(balance);
-    OI.buttonB.toggleOnTrue(balanceHolder);
-    OI.buttonY.toggleOnTrue(TwoBotBalanceCMD);
-    OI.buttonX.onTrue(new InstantCommand(encoderSub::resetEncoders));
   }
 
   /**
@@ -144,34 +110,7 @@ public class RobotContainer {
    * @return the command to run in autonomous
    */
   public Command getAutonomousCommand() {
-    Command m_autoCommand;
-    //get selected choice from chooser
-    String autoSelected = Robot.m_chooser.getSelected();
-    // turn auto choice, recieved as a string, into an actual command to return
-    switch (autoSelected) {
-      case "Auto1":
-        // Put custom auto code here
-        //System.out.println("Auto1");
-        Robot.autoStatus = "Auto1";
-        m_autoCommand = auto1;
-        break;
-      case "Auto2":
-        //System.out.println("Auto2");
-        Robot.autoStatus = "Auto2";
-        m_autoCommand = auto2;
-        break;
-      case "Auto3":
-        //System.out.println("Auto3");
-        Robot.autoStatus = "Auto3";
-        m_autoCommand = auto3;
-        break;
-      default: 
-        //System.out.println("Auto1");
-        Robot.autoStatus = "Auto1";
-        m_autoCommand = auto1;
-        break;
-    }
-    return m_autoCommand;
+    return null;
     
   }
 }
