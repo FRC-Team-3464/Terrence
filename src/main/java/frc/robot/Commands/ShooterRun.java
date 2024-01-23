@@ -32,7 +32,7 @@ public class ShooterRun extends CommandBase{
 
     @Override
     public void execute(){
-        shootSub.shoot(-.6);
+        shootSub.shoot(-.5);
     }
     @Override
     public boolean isFinished(){
